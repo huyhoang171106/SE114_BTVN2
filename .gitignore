@@ -1,0 +1,129 @@
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Generated files
+bin/
+gen/
+out/
+**/build/
+
+# Gradle
+.gradle/
+gradle-app.setting
+
+# Local configuration
+local.properties
+
+# Log files
+*.log
+
+# Android Studio navigation editor temp files
+.navigation/
+
+# Android Studio captures folder
+captures/
+
+# IntelliJ IDEA
+*.iml
+.idea/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/caches/
+.idea/libraries/
+.idea/caches/build_cache/
+.idea/shelf/
+.idea/deploymentTargetSelectionHistory.xml
+.idea/appInsightsServicesConfiguration.xml
+.idea/compiler.xml
+.idea/dispatcherConfigurations.xml
+.idea/inspectionProfiles/
+.idea/prettier.xml
+.idea/templateLanguages.xml
+.idea/httpIndexer/
+.idea/GsonCloudBackup.xml
+.idea/other.xml
+
+# External native build folder
+.externalNativeBuild/
+.cxx/
+
+# Google Services (e.g. APIs or Firebase)
+# google-services.json
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/readme.md
+
+# Version control
+vcs.xml
+
+# lint
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+lint/reports/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Files extended by macOS
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# KDE directory preferences
+.directory
+
+# Eclipse
+.classpath
+.project
+.settings/
+.externalToolBuilders/
+.metadata/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# Backup files
+*.bak
+*.orig
+
+# JRebel
+rebel.xml
+
+# SonarLint
+.sonarlint/
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+secrets.properties

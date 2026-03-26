@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <!-- Login -->
+    <string name="login_title">Login</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_sign_in">Sign in</string>
+    <string name="link_register">Forgot password?   Register</string>
+
+    <!-- Register -->
+    <string name="register_title">Register</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="btn_create">Create</string>
+    <string name="registration_success">Registration successful!</string>
+
+    <!-- Profile -->
+    <string name="welcome_message">Welcome!</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_avatar_url">Avatar URL</string>
+    <string name="hint_description">Description</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_logout">Logout</string>
+    <string name="profile_saved">Profile Saved</string>
+    <string name="content_description_avatar">User Avatar</string>
+
+    <!-- Validation errors -->
+    <string name="error_email_required">Email is required</string>
+    <string name="error_invalid_email">Please enter a valid email address</string>
+    <string name="error_name_required">Name is required</string>
+    <string name="error_password_too_short">Password must be at least 6 characters</string>
+    <string name="error_passwords_mismatch">Passwords do not match</string>
+</resources>

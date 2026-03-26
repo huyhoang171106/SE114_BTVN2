@@ -1,0 +1,3 @@
+<resources>
+    <integer name="min_password_length">6</integer>
+</resources>
