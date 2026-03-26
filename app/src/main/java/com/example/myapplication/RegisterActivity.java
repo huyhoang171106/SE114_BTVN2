@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Registration screen — collects user name, email, and password.
- * Validates input before completing registration.
+ * Validates all fields before completing registration.
  */
 public class RegisterActivity extends AppCompatActivity {
 
@@ -38,42 +37,31 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        btnRegister.setOnClickListener(v -> {
-            String name = etName.getText().toString().trim();
-            String email = etEmail.getText().toString().trim();
-            String password = etPassword.getText().toString();
-            String confirmPassword = etConfirmPassword.getText().toString();
-
-            if (!validateInput(name, email, password, confirmPassword)) {
-                return;
-            }
-
-            Toast.makeText(this, R.string.registration_success, Toast.LENGTH_SHORT).show();
-            finish();
-        });
+        btnRegister.setOnClickListener(v -> handleRegister());
     }
 
-    private boolean validateInput(String name, String email, String password, String confirmPassword) {
-        if (name.isEmpty()) {
-            etName.setError(getString(R.string.error_name_required));
-            return false;
+    private void handleRegister() {
+        int minLength = getResources().getInteger(R.integer.min_password_length);
+
+        // Validate each field; stop at the first failure
+        if (!ValidationUtils.validateRequired(etName, this, R.string.error_name_required)) {
+            return;
+        }
+        if (!ValidationUtils.validateEmail(etEmail, this)) {
+            return;
+        }
+        if (!ValidationUtils.validatePassword(etPassword, this, minLength)) {
+            return;
         }
 
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etEmail.setError(getString(R.string.error_invalid_email));
-            return false;
-        }
-
-        if (password.length() < getResources().getInteger(R.integer.min_password_length)) {
-            etPassword.setError(getString(R.string.error_password_too_short));
-            return false;
-        }
-
-        if (!password.equals(confirmPassword)) {
+        String password = etPassword.getText().toString();
+        String confirm = etConfirmPassword.getText().toString();
+        if (!ValidationUtils.valuesMatch(password, confirm)) {
             etConfirmPassword.setError(getString(R.string.error_passwords_mismatch));
-            return false;
+            return;
         }
 
-        return true;
+        Toast.makeText(this, R.string.registration_success, Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

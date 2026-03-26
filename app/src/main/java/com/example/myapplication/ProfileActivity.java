@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText etProfileName;
     private EditText etProfileEmail;
     private EditText etProfileAddress;
-    private EditText etProfileAvatarUrl;
+    private EditText etProfileAvatar;
     private EditText etProfileDescription;
     private ImageView ivAvatar;
     private Button btnSave;
@@ -40,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         etProfileName = findViewById(R.id.etProfileName);
         etProfileEmail = findViewById(R.id.etProfileEmail);
         etProfileAddress = findViewById(R.id.etProfileAddress);
-        etProfileAvatarUrl = findViewById(R.id.etProfileAvatar);
+        etProfileAvatar = findViewById(R.id.etProfileAvatar);
         etProfileDescription = findViewById(R.id.etProfileDescription);
         ivAvatar = findViewById(R.id.ivAvatar);
         btnSave = findViewById(R.id.btnSave);
@@ -50,25 +51,29 @@ public class ProfileActivity extends AppCompatActivity {
     private void populateFromIntent() {
         String userEmail = getIntent().getStringExtra(Constants.EXTRA_USER_EMAIL);
 
-        if (userEmail != null && !userEmail.isEmpty()) {
+        if (ValidationUtils.isNonEmpty(userEmail)) {
             tvWelcome.setText(R.string.welcome_message);
             etProfileEmail.setText(userEmail);
         }
     }
 
     private void setupListeners() {
-        btnSave.setOnClickListener(v -> {
-            String email = etProfileEmail.getText().toString().trim();
+        btnSave.setOnClickListener(v -> handleSave());
+        btnLogout.setOnClickListener(v -> handleLogout());
+    }
 
-            if (email.isEmpty()) {
-                etProfileEmail.setError(getString(R.string.error_email_required));
-                return;
-            }
+    private void handleSave() {
+        if (!ValidationUtils.validateRequired(etProfileEmail, this, R.string.error_email_required)) {
+            return;
+        }
+        // TODO: persist profile changes to backend or local storage
+        Toast.makeText(this, R.string.profile_saved, Toast.LENGTH_SHORT).show();
+    }
 
-            // TODO: persist profile changes to backend or local storage
-            Toast.makeText(this, R.string.profile_saved, Toast.LENGTH_SHORT).show();
-        });
-
-        btnLogout.setOnClickListener(v -> finish());
+    private void handleLogout() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }

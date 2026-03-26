@@ -2,17 +2,15 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * Login screen — entry point of the app.
- * Validates email input and navigates to the profile screen.
+ * Entry point of the app — authenticates the user by email
+ * and navigates to the profile screen on success.
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -39,21 +37,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setupListeners() {
         btnSignIn.setOnClickListener(v -> {
-            String email = etEmail.getText().toString().trim();
-
-            if (!isValidEmail(email)) {
-                etEmail.setError(getString(R.string.error_invalid_email));
+            if (!ValidationUtils.validateEmail(etEmail, this)) {
                 return;
             }
-
-            navigateToProfile(email);
+            navigateToProfile(etEmail.getText().toString().trim());
         });
 
         tvRegister.setOnClickListener(v -> navigateToRegister());
-    }
-
-    private boolean isValidEmail(String email) {
-        return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void navigateToProfile(String email) {
@@ -63,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateToRegister() {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }
